@@ -4,8 +4,22 @@
 
 Run Kibana 4 on dokku.
 
-## Config
+## Deploy
 
-Env vars:
+Install ElasticSearch and create the app and its db:
 
-- ELASTICSEARCH_URL
+```
+dokku apps:create kibana
+dokku plugin:install https://github.com/dokku/dokku-elasticsearch.git elasticsearch
+dokku elasticsearch:create kibana
+dokku elasticsearch:link kibana kibana
+```
+
+Now push your app:
+
+```
+git clone git@github.com:Aluxian/dokku-kibana.git
+cd dokku-kibana
+git remote add dokku dokku@yourserver.me:kibana
+git push dokku master
+```
